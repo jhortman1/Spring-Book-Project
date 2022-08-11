@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -23,5 +25,5 @@ public class ReadingList {
     @ManyToOne
     private User user;
     @ManyToMany(mappedBy = "readingLists")
-    List<Book>books=new ArrayList<>();
+    Set<Book> books=new HashSet<>();
 }

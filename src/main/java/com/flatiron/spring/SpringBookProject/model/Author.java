@@ -4,8 +4,8 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -17,5 +17,5 @@ public class Author {
     private int id;
     private String name;
     @OneToMany(mappedBy = "author")
-    private List<Book>books=new ArrayList<>();
+    private Set<Book> books=new HashSet<>();
 }

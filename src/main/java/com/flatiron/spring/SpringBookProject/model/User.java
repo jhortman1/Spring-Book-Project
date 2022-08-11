@@ -7,7 +7,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -22,5 +24,5 @@ public class User {
     private String username;
     private String password;
     @OneToMany(mappedBy = "user")
-    private List<ReadingList>readingLists=new ArrayList<>();
+    private Set<ReadingList> readingLists=new HashSet<>();
 }

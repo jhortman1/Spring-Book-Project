@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 @Getter
 @Setter
@@ -24,9 +22,9 @@ public class Book {
     private int pages;
     private Date published;
     @ManyToMany
-    private List<ReadingList>readingLists=new ArrayList<>();
+    private Set<ReadingList>readingLists=new HashSet<>();
     @ManyToMany(mappedBy = "books")
-    private  List<Genre>genres=new ArrayList<>();
+    private Set<Genre> genres=new HashSet<>();
     @ManyToOne
     private Author author;
 }
