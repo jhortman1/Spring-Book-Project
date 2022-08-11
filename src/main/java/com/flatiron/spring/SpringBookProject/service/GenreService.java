@@ -1,4 +1,4 @@
 package com.flatiron.spring.SpringBookProject.service;
 
-public class GenereService {
+public class GenreService {
 }
