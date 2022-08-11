@@ -17,14 +17,8 @@ public class GenreController {
     private GenreService genreService;
 
     @GetMapping("/{id}/books")
-    public List<BookDTO> getAllBooksInGenreById()
+    public List<BookDTO> getAllBooksInGenreById(@PathVariable int id)
     {
-        return  null;
+        return  genreService.getAllBooksInGenreById(id);
     }
-    @PostMapping
-    public GenreDTO createGenre(@Valid @RequestBody GenreDTO genreDTO)
-    {
-        return null;
-    }
-
 }
