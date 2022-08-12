@@ -3,6 +3,7 @@ package com.flatiron.spring.SpringBookProject.controller;
 import com.flatiron.spring.SpringBookProject.dto.ReadingListDTO;
 import com.flatiron.spring.SpringBookProject.dto.UserDTO;
 import com.flatiron.spring.SpringBookProject.model.ReadingList;
+import com.flatiron.spring.SpringBookProject.model.User;
 import com.flatiron.spring.SpringBookProject.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,29 +18,30 @@ public class UserController {
     UserService userService;
 
     @PostMapping
-    public UserDTO createUser(@Valid @RequestBody UserDTO userDTO)
+    public UserDTO createUser(@Valid @RequestBody User user)
     {
-        return null;
+        return userService.create(user);
     }
     @DeleteMapping("/{id}")
     public void deleteUserById(@PathVariable int id)
     {
-
+        userService.delete(id);
     }
     @GetMapping("/{id}/reading_lists")
-    public List<ReadingList> getUserReadingListsByUserId()
+    public List<ReadingListDTO> getUserReadingListsByUserId(@PathVariable int id)
     {
-        return  null;
+        return  userService.getReadingListsByUserId(id);
     }
     @PostMapping("/{id}/reading_lists")
-    public ReadingListDTO createReadingListForUserById()
+    public ReadingListDTO createReadingListForUserById(@PathVariable int id, ReadingListDTO readingListDTO)
     {
-        return null;
+        return userService.createReadingListByUserId(id, readingListDTO);
     }
     @GetMapping("{id}/reading_lists/{list_id}")
-    public List<ReadingListDTO> getUserReadingListByUserId()
+    public ReadingListDTO getUserReadingListByUserId(@PathVariable int id, @PathVariable int list_id)
     {
-        return null;
+        return userService.getReadingListsByUserIdListId(id,list_id);
     }
+
 
 }
