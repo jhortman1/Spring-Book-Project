@@ -8,5 +8,5 @@ import java.util.List;
 @Data
 public class GetGenreDTO {
     private String name;
-    private List<BookDTO>bookDTOList=new ArrayList<>();
+    private List<BookDTO>bookList;
 }

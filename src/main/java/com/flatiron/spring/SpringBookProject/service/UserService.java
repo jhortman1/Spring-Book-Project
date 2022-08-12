@@ -1,20 +1,21 @@
 package com.flatiron.spring.SpringBookProject.service;
 
+import com.flatiron.spring.SpringBookProject.dto.BookDTO;
 import com.flatiron.spring.SpringBookProject.dto.ReadingListDTO;
 import com.flatiron.spring.SpringBookProject.dto.UserDTO;
-import com.flatiron.spring.SpringBookProject.exception.NotFoundException;
-import com.flatiron.spring.SpringBookProject.exception.UsernameAlreadyExists;
 import com.flatiron.spring.SpringBookProject.model.ReadingList;
 import com.flatiron.spring.SpringBookProject.model.User;
 import com.flatiron.spring.SpringBookProject.repository.ReadingListRepository;
 import com.flatiron.spring.SpringBookProject.repository.UserRepository;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
-import javax.persistence.ManyToOne;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
+
 
 @Service
 public class UserService {
@@ -27,10 +28,6 @@ public class UserService {
 
     public UserDTO create(User user)
     {
-        if(userRepository.findAll().stream().anyMatch((u)->u.getUsername().equals(u.getUsername())))
-        {
-            throw new UsernameAlreadyExists("Username TAKE, Please enter a different username");
-        }
         return modelMapper.map(userRepository.save(user),UserDTO.class);
     }
 
@@ -42,55 +39,42 @@ public class UserService {
         }
         else
         {
-            throw new NotFoundException("UserID NOT FOUND");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
     }
-    public List<ReadingListDTO> getReadingListsByUserId(int id) {
-        return readingListRepository
-                .findAll()
-                .stream()
-                .filter(
-                        (rl)->rl.getUser().getId()==id)
-                .map(
-                        (rl)->modelMapper.map(rl,ReadingListDTO.class))
-                .toList();
+    public ReadingList getReadingListsByUserId(int id) {
+        User user = userRepository.findById(id).orElseThrow(()->new ResponseStatusException(HttpStatus.NOT_FOUND));
+        return modelMapper.map(user.getReadingLists(),ReadingList.class);
+    }
+    public List<BookDTO> getReadingListsByUserIdListId(int id, int list_id)
+    {
+        ReadingList readingList;
+        if(!userRepository.existsById(id))
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        else if(!readingListRepository.existsById(list_id))
+        {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        else {
+            readingList = readingListRepository.findById(list_id).get();
+        }
+        return readingList.getBooks().stream().map(book->modelMapper.map(book, BookDTO.class)).toList();
     }
     public ReadingListDTO createReadingListByUserId(int id, ReadingListDTO readingListDTO)
     {
         if(!userRepository.existsById(id))
         {
-            throw new NotFoundException("User id: "+ id + "NOT FOUND");
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
         }
-        return modelMapper
-                .map(
-                        readingListRepository
-                                .save(
-                                        modelMapper
-                                                .map(readingListDTO,ReadingList.class))
-                        ,ReadingListDTO.class);
+        Optional<User> u1 = userRepository.findById(id);
+
+        ReadingList rl = modelMapper.map(readingListDTO,ReadingList.class);
+        u1.get().addReadingList(readingListRepository.save(rl));
+        User x = userRepository.save(u1.get());
+        return modelMapper.map(readingListRepository.save(rl),ReadingListDTO.class);
     }
-    public ReadingListDTO getReadingListsByUserIdListId(int id, int list_id)
-    {
-        List<ReadingListDTO> readingListDTO;
-        if(!userRepository.existsById(id))
-        {
-            throw new NotFoundException("User id: "+ id + "NOT FOUND");
-        }
-        else if(!readingListRepository.existsById(list_id))
-        {
-            throw new NotFoundException("List id: "+ id + "NOT FOUND");
-        }
-        else {
-            readingListDTO = readingListRepository
-                    .findAll()
-                    .stream()
-                    .filter(
-                            (rl)->rl.getUser().getId()==id)
-                    .filter(
-                            (rl)->rl.getId()==list_id)
-                    .map((rl)->modelMapper.map(rl,ReadingListDTO.class)).toList();
-        }
-        return readingListDTO.get(0);
-    }
+
 
 }

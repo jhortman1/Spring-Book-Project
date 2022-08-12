@@ -1,5 +1,6 @@
 package com.flatiron.spring.SpringBookProject.model;
 
+import com.flatiron.spring.SpringBookProject.dto.ReadingListDTO;
 import com.sun.istack.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -29,4 +30,8 @@ public class User {
     private String password;
     @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private Set<ReadingList> readingLists=new HashSet<>();
+    public void addReadingList(ReadingList readingList)
+    {
+        readingLists.add(readingList);
+    }
 }

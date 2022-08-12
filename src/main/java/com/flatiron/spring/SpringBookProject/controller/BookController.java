@@ -1,6 +1,7 @@
 package com.flatiron.spring.SpringBookProject.controller;
 
 import com.flatiron.spring.SpringBookProject.dto.BookDTO;
+import com.flatiron.spring.SpringBookProject.dto.CreateBookDTO;
 import com.flatiron.spring.SpringBookProject.dto.GetBookDTO;
 import com.flatiron.spring.SpringBookProject.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +17,7 @@ public class BookController {
     private BookService bookService;
 
     @GetMapping
-    public List<BookDTO> getAllBooks()
+    public List<GetBookDTO> getAllBooks()
     {
         return bookService.getAllBooks();
     }
@@ -26,14 +27,14 @@ public class BookController {
         return bookService.getBookById(id);
     }
     @PostMapping
-    public GetBookDTO createBook(@Valid @RequestBody BookDTO bookDTO)
+    public BookDTO createBook(@Valid @RequestBody CreateBookDTO bookDTO)
     {
         return bookService.create(bookDTO);
     }
     @PutMapping("/{id}")
-    public GetBookDTO updateBook(@PathVariable int id, GetBookDTO getBookDTO)
+    public GetBookDTO updateBook(@PathVariable int id, @RequestBody BookDTO bookDTO)
     {
-        return bookService.update(id,getBookDTO);
+        return bookService.update(id,bookDTO);
     }
     @DeleteMapping("/{id}")
     public void deleteBookById(@PathVariable int id)

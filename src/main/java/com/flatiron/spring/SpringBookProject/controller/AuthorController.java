@@ -1,23 +1,19 @@
 package com.flatiron.spring.SpringBookProject.controller;
 
 import com.flatiron.spring.SpringBookProject.dto.AuthorDTO;
-import com.flatiron.spring.SpringBookProject.model.Author;
+import com.flatiron.spring.SpringBookProject.service.AuthorService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
-import javax.validation.Valid;
-import java.util.Set;
+import java.util.List;
 
 @RestController
 @RequestMapping("api/author")
 public class AuthorController {
+    @Autowired
+    AuthorService authorService;
     @GetMapping
-    public Set<Author> getAllAuthors()
+    public List<AuthorDTO> getAllAuthors()
     {
-        return null;
-    }
-    @PostMapping
-    public AuthorDTO createAuthor(@Valid @RequestBody AuthorDTO authorDTO)
-    {
-        return null;
+        return authorService.getAll();
     }
 }

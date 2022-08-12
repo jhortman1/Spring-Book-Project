@@ -1,5 +1,6 @@
 package com.flatiron.spring.SpringBookProject.controller;
 
+import com.flatiron.spring.SpringBookProject.dto.BookDTO;
 import com.flatiron.spring.SpringBookProject.dto.ReadingListDTO;
 import com.flatiron.spring.SpringBookProject.dto.UserDTO;
 import com.flatiron.spring.SpringBookProject.model.ReadingList;
@@ -28,17 +29,17 @@ public class UserController {
         userService.delete(id);
     }
     @GetMapping("/{id}/reading_lists")
-    public List<ReadingListDTO> getUserReadingListsByUserId(@PathVariable int id)
+    public ReadingList getUserReadingListsByUserId(@PathVariable int id)
     {
         return  userService.getReadingListsByUserId(id);
     }
     @PostMapping("/{id}/reading_lists")
-    public ReadingListDTO createReadingListForUserById(@PathVariable int id, ReadingListDTO readingListDTO)
+    public ReadingListDTO createReadingListForUserById(@PathVariable int id, @RequestBody ReadingListDTO readingListDTO)
     {
         return userService.createReadingListByUserId(id, readingListDTO);
     }
     @GetMapping("{id}/reading_lists/{list_id}")
-    public ReadingListDTO getUserReadingListByUserId(@PathVariable int id, @PathVariable int list_id)
+    public List<BookDTO> getUserReadingListByUserId(@PathVariable int id, @PathVariable int list_id)
     {
         return userService.getReadingListsByUserIdListId(id,list_id);
     }
