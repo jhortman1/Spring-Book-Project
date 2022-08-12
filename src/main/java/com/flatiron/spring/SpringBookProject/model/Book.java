@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
 import java.util.*;
@@ -26,5 +28,7 @@ public class Book {
     @ManyToMany(mappedBy = "books")
     private Set<Genre> genres=new HashSet<>();
     @ManyToOne
+    @JoinColumn(name = "authorId")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     private Author author;
 }

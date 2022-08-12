@@ -16,6 +16,6 @@ public class Author {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author",cascade = CascadeType.ALL)
     private Set<Book> books=new HashSet<>();
 }
