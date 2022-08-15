@@ -1,0 +1,333 @@
+{
+	"info": {
+		"_postman_id": "91eeb394-8f00-4541-ab81-509fbbbc2d54",
+		"name": "Spring Book Project",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "7325332"
+	},
+	"item": [
+		{
+			"name": "localhost:8080/api/books",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books"
+					]
+				},
+				"description": "\tGets all the books in the Book table."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/books/{id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/books/{id}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books",
+						"{id}"
+					]
+				},
+				"description": "Gets a single book with the given ID."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/books",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "d44e6fe9-8bdd-4cc6-a37a-7036a0047f05",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"Where you go to die alone. Vol2\"\r\n    \"pages\": 300\r\n    \"published\": \"1990-04-16\"\r\n    \"authorName\": \"James Hartbridge\"\r\n    \"genre\": \"Horor\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books"
+					]
+				},
+				"description": "Create a book."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/books/{id}",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/books/{id}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books",
+						"{id}"
+					]
+				},
+				"description": "Update a book with the given ID."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/books/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/books/{id}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"books",
+						"{id}"
+					]
+				},
+				"description": "Delete a book."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/genre/{id}/books",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "d44e6fe9-8bdd-4cc6-a37a-7036a0047f05",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/genre/{id}/books",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"genre",
+						"{id}",
+						"books"
+					]
+				},
+				"description": "Get all books in the genre with the given ID."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/users",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "d44e6fe9-8bdd-4cc6-a37a-7036a0047f05",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"User1\",\r\n    \"paddword\": \"password1\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/users",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users"
+					]
+				},
+				"description": "Create a user."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/users/{id}",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/users/{id}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"{id}"
+					]
+				},
+				"description": "Delete a user."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/users/{id}/reading_lists",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/users/{id}/reading_lists",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"{id}",
+						"reading_lists"
+					]
+				},
+				"description": "Gets the given user’s reading lists."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/users/{id}/reading_lists",
+			"request": {
+				"auth": {
+					"type": "basic",
+					"basic": [
+						{
+							"key": "password",
+							"value": "d44e6fe9-8bdd-4cc6-a37a-7036a0047f05",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "user",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"name\": \"Work Reading List\"\r\n}"
+				},
+				"url": {
+					"raw": "localhost:8080/api/users/{id}/reading_lists",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"{id}",
+						"reading_lists"
+					]
+				},
+				"description": "Create a new reading list for the user with the given ID."
+			},
+			"response": []
+		},
+		{
+			"name": "localhost:8080/api/users/{id}/reading_lists/{list_id}",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:8080/api/users/{id}/reading_lists/{list_id}",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"users",
+						"{id}",
+						"reading_lists",
+						"{list_id}"
+					]
+				},
+				"description": "Gets the given user’s reading list with the ID list_id."
+			},
+			"response": []
+		}
+	]
+}
